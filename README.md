@@ -6,6 +6,30 @@ It works with **any OpenAI-compatible LLM provider**, including several **free**
 
 > ⚠️ All sample invoices in `samples/` are **fake**. Every company, person, address and number was made up for demonstration.
 
+![Results: 5 invoices extracted, one flagged because its line items don't add up to the subtotal](docs/screenshots/02-results.png)
+
+---
+
+## 📸 Screenshots
+
+**1. Upload.** Drag in several invoices at once (PDFs, scans or photos):
+
+![Upload page](docs/screenshots/01-upload.png)
+
+**2. Excel export, "Invoices" sheet.** One row per invoice. The invoice whose totals don't add up is highlighted, with the reason:
+
+![Excel Invoices sheet](docs/screenshots/05-excel-invoices.png)
+
+**3. Excel export, "Line Items" sheet.** Every line item, linked to its invoice number:
+
+![Excel Line Items sheet](docs/screenshots/06-excel-line-items.png)
+
+**4. REST API.** Interactive docs at `/docs`, for connecting the extractor to other tools:
+
+![API docs](docs/screenshots/04-api-docs.png)
+
+*Screenshots show real output from Google Gemini (`gemini-3.5-flash-lite`, free tier) on the fake sample invoices.*
+
 ---
 
 ## ✨ Features

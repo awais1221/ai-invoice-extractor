@@ -63,6 +63,15 @@ def test_money_values_are_numeric(sample_results):
     assert total.number_format == "#,##0.00"
 
 
+def test_long_notes_wrap_instead_of_being_cut_off(sample_results):
+    ws = _load(sample_results)["Invoices"]
+    notes_col = INVOICE_COLUMNS.index("Validation Notes") + 1
+    cell = ws.cell(row=3, column=notes_col)
+    assert "MISMATCH" in cell.value
+    assert cell.alignment.wrap_text is True
+    assert ws.cell(row=3, column=1).alignment.wrap_text is not True  # only notes wrap
+
+
 def test_empty_results_still_produce_valid_workbook():
     wb = _load([])
     assert wb["Invoices"].max_row == 1

@@ -173,8 +173,8 @@
           <td><button class="toggle" data-row="${i}" title="Show line items">▶</button></td>
           <td>${escapeHtml(r.filename)}</td>
           <td>${escapeHtml(d.vendor_name) || "—"}</td>
-          <td>${escapeHtml(d.invoice_number) || "—"}</td>
-          <td>${escapeHtml(d.invoice_date) || "—"}</td>
+          <td class="nowrap">${escapeHtml(d.invoice_number) || "—"}</td>
+          <td class="nowrap">${escapeHtml(d.invoice_date) || "—"}</td>
           <td class="num">${formatMoney(d.total_amount, escapeHtml(d.currency))}</td>
           <td>${badge}</td>
           <td class="notes">${escapeHtml(d.validation_notes)}</td></tr>

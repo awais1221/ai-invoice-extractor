@@ -50,7 +50,7 @@ body {
 }
 .dropzone:hover, .dropzone:focus { border-color: var(--primary); outline: none; }
 .dropzone.dragover { border-color: var(--primary); background: #eef1ff; }
-.dz-icon { font-size: 36px; }
+.dz-icon { color: var(--primary); }
 .dz-title { font-size: 18px; font-weight: 600; margin: 8px 0 4px; }
 .dz-sub { color: var(--muted); margin: 0; font-size: 14px; }
 .link { color: var(--primary); font-weight: 600; }
@@ -94,6 +94,7 @@ table.results { width: 100%; border-collapse: collapse; font-size: 14px; }
 .results th { text-align: left; color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .03em; padding: 10px; border-bottom: 1px solid var(--border); }
 .results td { padding: 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
 .results .num { text-align: right; white-space: nowrap; }
+.results .nowrap { white-space: nowrap; }
 .results tr.row-bad td { background: var(--bad-bg); }
 .results tr.row-err td { background: var(--err-bg); color: var(--muted); }
 .results .notes { max-width: 340px; font-size: 13px; }

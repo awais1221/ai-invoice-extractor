@@ -26,6 +26,8 @@ LINE_COLUMNS = [
     "Unit Price", "Line Total",
 ]
 MONEY_COLUMNS = {"Subtotal", "Tax", "Total Amount", "Unit Price", "Line Total"}
+WRAP_COLUMNS = {"Validation Notes", "Error"}
+WRAP_WIDTH = 50
 
 HEADER_FILL = PatternFill("solid", start_color="1F4E78")
 HEADER_FONT = Font(bold=True, color="FFFFFF")
@@ -87,14 +89,20 @@ def _style_sheet(ws: Worksheet, row_fills: Iterable[PatternFill | None]) -> None
 
     for row_idx, fill in enumerate(row_fills, start=2):
         for cell in ws[row_idx]:
+            header = headers[cell.column - 1]
             if fill is not None:
                 cell.fill = fill
-            if headers[cell.column - 1] in MONEY_COLUMNS:
+            if header in MONEY_COLUMNS:
                 cell.number_format = MONEY_FORMAT
+            # Long text wraps instead of being cut off; rows stay top-aligned.
+            cell.alignment = Alignment(vertical="top", wrap_text=header in WRAP_COLUMNS)
 
-    # Approximate auto-fit column widths.
+    # Approximate auto-fit column widths (wrapped columns get a fixed width).
     for col_idx, header in enumerate(headers, start=1):
         letter = get_column_letter(col_idx)
+        if header in WRAP_COLUMNS:
+            ws.column_dimensions[letter].width = WRAP_WIDTH
+            continue
         longest = max(
             (len(str(c.value)) for c in ws[letter] if c.value is not None),
             default=len(str(header)),
