@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Invoice Extractor</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <span class="brand-icon">🧾</span>
+        <div>
+          <h1>AI Invoice Extractor</h1>
+          <p class="tagline">Upload invoices, get clean data, download Excel.</p>
+        </div>
+      </div>
+      <span id="llm-status" class="pill pill-muted">Checking…</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <div id="dropzone" class="dropzone" tabindex="0" role="button"
+           aria-label="Drop invoices here or click to choose files">
+        <div class="dz-icon">⬆️</div>
+        <p class="dz-title">Drag &amp; drop invoices here</p>
+        <p class="dz-sub">or <span class="link">browse files</span> · PDF, JPG, PNG · up to
+          <span id="max-mb">10</span> MB each</p>
+        <input id="file-input" type="file" multiple accept=".pdf,.jpg,.jpeg,.png" hidden>
+      </div>
+
+      <ul id="file-list" class="file-list"></ul>
+
+      <div class="actions">
+        <button id="clear-btn" class="btn btn-ghost" disabled>Clear</button>
+        <button id="analyze-btn" class="btn btn-primary" disabled>
+          <span class="spinner" hidden></span><span class="label">Analyze invoices</span>
+        </button>
+      </div>
+    </section>
+
+    <section id="results-card" class="card" hidden>
+      <div class="results-header">
+        <div>
+          <h2>Results</h2>
+          <p id="summary" class="muted"></p>
+        </div>
+        <a id="download-btn" class="btn btn-success" href="#" download>⬇ Download Excel</a>
+      </div>
+
+      <div class="table-wrap">
+        <table class="results">
+          <thead>
+            <tr>
+              <th></th>
+              <th>File</th>
+              <th>Vendor</th>
+              <th>Invoice #</th>
+              <th>Date</th>
+              <th class="num">Total</th>
+              <th>Totals</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="results-body"></tbody>
+        </table>
+      </div>
+      <p class="legend">
+        <span class="swatch swatch-bad"></span> Totals don't add up
+        <span class="swatch swatch-err"></span> File could not be processed
+      </p>
+    </section>
+
+    <div id="toast" class="toast" hidden></div>
+  </main>
+
+  <footer class="container footer">
+    Built with FastAPI · Data is extracted by an LLM and checked in Python. Always review important figures.
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
